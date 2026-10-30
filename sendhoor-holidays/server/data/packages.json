@@ -1,0 +1,110 @@
+[
+  {
+    "id": "varkala",
+    "destination": "Varkala",
+    "state": "Kerala",
+    "vibe": "Red cliffs, beach cafes, and surfing",
+    "connection": "1 hr train from Thiruvananthapuram",
+    "days": 2,
+    "priceFrom": 2500,
+    "priceTo": 4500,
+    "image": "/images/varkala.jpg",
+    "imageAlt": "Red cliffs above the sea at Varkala at sunset"
+  },
+  {
+    "id": "alleppey",
+    "destination": "Alleppey",
+    "state": "Kerala",
+    "vibe": "Canal kayaking, village walks, and houseboats",
+    "connection": "2.5 hr train from Thiruvananthapuram",
+    "days": 2,
+    "priceFrom": 3000,
+    "priceTo": 5500,
+    "image": "/images/alleppey.jpg",
+    "imageAlt": "Houseboat on the Alleppey backwaters"
+  },
+  {
+    "id": "munnar",
+    "destination": "Munnar",
+    "state": "Kerala",
+    "vibe": "Tea gardens, misty viewpoints, and trekking",
+    "connection": "4 hr drive from Kochi Airport",
+    "days": 2,
+    "priceFrom": 3500,
+    "priceTo": 6000,
+    "image": "/images/munnar.jpg",
+    "imageAlt": "Tea estate on the hills of Munnar"
+  },
+  {
+    "id": "ooty",
+    "destination": "Ooty",
+    "state": "Tamil Nadu",
+    "vibe": "Toy train, botanical gardens, and chocolate",
+    "connection": "3 hr drive from Coimbatore",
+    "days": 2,
+    "priceFrom": 3500,
+    "priceTo": 6500,
+    "image": "/images/ooty.jpg",
+    "imageAlt": "Toy train running through Ooty"
+  },
+  {
+    "id": "pondicherry",
+    "destination": "Pondicherry",
+    "state": "Tamil Nadu / UT",
+    "vibe": "French colonial architecture and beach cafes",
+    "connection": "3 hr drive from Chennai",
+    "days": 2,
+    "priceFrom": 3500,
+    "priceTo": 6000,
+    "image": "/images/pondicherry.jpg",
+    "imageAlt": "Promenade beach in Pondicherry"
+  },
+  {
+    "id": "gokarna",
+    "destination": "Gokarna",
+    "state": "Karnataka",
+    "vibe": "Trekking between secluded, quiet beaches",
+    "connection": "3 hr train from Goa",
+    "days": 2,
+    "priceFrom": 2500,
+    "priceTo": 4500,
+    "image": "/images/gokarna.jpg",
+    "imageAlt": "Main beach in Gokarna"
+  },
+  {
+    "id": "lonavala",
+    "destination": "Lonavala",
+    "state": "Maharashtra",
+    "vibe": "Waterfalls, fort treks, and scenic valleys",
+    "connection": "2 hr drive/train from Mumbai or Pune",
+    "days": 2,
+    "priceFrom": 4000,
+    "priceTo": 7000,
+    "image": "/images/lonavala.jpg",
+    "imageAlt": "Waterfall in the hills near Lonavala"
+  },
+  {
+    "id": "rishikesh",
+    "destination": "Rishikesh",
+    "state": "Uttarakhand",
+    "vibe": "Ganga Aarti, river rafting, and cafes",
+    "connection": "1 hr drive from Dehradun Airport",
+    "days": 2,
+    "priceFrom": 3000,
+    "priceTo": 5500,
+    "image": "/images/rishikesh.jpg",
+    "imageAlt": "River rafting on the Ganga near Ram Jhula, Rishikesh"
+  },
+  {
+    "id": "jaipur",
+    "destination": "Jaipur",
+    "state": "Rajasthan",
+    "vibe": "Royal grand forts, palaces, and bazaars",
+    "connection": "Flight/train from Delhi",
+    "days": 2,
+    "priceFrom": 4000,
+    "priceTo": 7500,
+    "image": "/images/jaipur.jpg",
+    "imageAlt": "The Hawa Mahal in Jaipur"
+  }
+]

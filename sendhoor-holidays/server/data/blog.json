@@ -1,0 +1,41 @@
+[
+  {
+    "id": "monsoon-magic-in-kerala",
+    "title": "Monsoon magic in Kerala",
+    "excerpt": "Why the rainy season is the best time to visit the backwaters.",
+    "coverImage": "/images/kerala.jpg",
+    "coverAlt": "Houseboats on the Kerala backwaters",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Why the rainy season is the best time to visit the backwaters."
+      }
+    ]
+  },
+  {
+    "id": "packing-light-for-the-alps",
+    "title": "Packing light for the Alps",
+    "excerpt": "A layering guide for mountain trips in every season.",
+    "coverImage": "/images/swiss-alps.jpg",
+    "coverAlt": "The Matterhorn seen from the Gornergrat railway",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "A layering guide for mountain trips in every season."
+      }
+    ]
+  },
+  {
+    "id": "a-first-timer-guide-to-bali",
+    "title": "A first-timer guide to Bali",
+    "excerpt": "Neighbourhoods, etiquette and the best day trips.",
+    "coverImage": "/images/bali.jpg",
+    "coverAlt": "Green rice terraces in Ubud, Bali",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Neighbourhoods, etiquette and the best day trips."
+      }
+    ]
+  }
+]

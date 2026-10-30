@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sedan-suv",
+    "name": "Sedan / SUV",
+    "seats": 4,
+    "fuel": "Petrol",
+    "available": 3,
+    "bestFor": "Couples, small families and short city trips",
+    "features": [
+      "Air-conditioned cabin",
+      "Experienced driver",
+      "Space for two large bags"
+    ],
+    "photos": []
+  },
+  {
+    "id": "coach-bus",
+    "name": "Coach bus",
+    "seats": 54,
+    "fuel": "Diesel",
+    "available": 1,
+    "bestFor": "Large groups, school trips and corporate tours",
+    "features": [
+      "Air-conditioned with reclining seats",
+      "Overhead and under-deck luggage space",
+      "Driver and helper on every trip"
+    ],
+    "photos": []
+  }
+]

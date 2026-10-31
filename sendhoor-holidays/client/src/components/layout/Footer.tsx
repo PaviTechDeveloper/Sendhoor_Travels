@@ -62,19 +62,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-ink/10">
-        <details className="mx-auto max-w-6xl px-6 pt-5 text-xs text-ink/60">
-          <summary className="cursor-pointer hover:text-ink">Photo credits</summary>
-          <ul className="mt-3 space-y-1 pb-2">
-            {photoCredits.map((credit) => (
-              <li key={credit.source}>
-                {credit.subject}: {credit.photographer}, {credit.license} ·{' '}
-                <a href={credit.source} target="_blank" rel="noopener noreferrer" className="underline hover:text-ink">
-                  source
-                </a>
-              </li>
-            ))}
-          </ul>
-        </details>
+
         <p className="mx-auto max-w-6xl px-6 py-6 text-center text-xs text-ink/60">
           © {new Date().getFullYear()} Sendhoor Holidays. All rights reserved.
         </p>

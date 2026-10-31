@@ -36,6 +36,10 @@ export default function Navbar() {
           <img src="/images/logo.jpg" alt="" className="h-12 w-12 rounded-xl object-cover" />
         </Link>
 
+        <span className={`flex-1 whitespace-nowrap text-center text-sm font-bold sm:text-base lg:hidden ${textTone}`}>
+          Sendhoor Holidays
+        </span>
+
         <ul className="hidden items-center gap-7 lg:flex">
           {navLinks.map((link) => (
             <li key={link.to}>

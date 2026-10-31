@@ -1,8 +1,5 @@
-import { readFile, writeFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
-
-const dataFile = fileURLToPath(new URL('../data/packages.json', import.meta.url));
+import { readData, writeData } from './storage.js';
 
 // Photos are either an uploaded file on this site, a local path, or a full https link.
 export const photoPath = z
@@ -36,11 +33,7 @@ export type PackageDetails = z.infer<typeof packageSchema>;
 export type TripPackage = PackageDetails & { id: string };
 
 export async function listPackages(): Promise<TripPackage[]> {
-  return JSON.parse(await readFile(dataFile, 'utf8')) as TripPackage[];
-}
-
-async function savePackages(packages: TripPackage[]) {
-  await writeFile(dataFile, `${JSON.stringify(packages, null, 2)}\n`, 'utf8');
+  return readData<TripPackage[]>('packages.json');
 }
 
 export async function updatePackage(id: string, details: PackageDetails): Promise<TripPackage | null> {
@@ -50,7 +43,7 @@ export async function updatePackage(id: string, details: PackageDetails): Promis
 
   const updated: TripPackage = { id, ...details };
   packages[index] = updated;
-  await savePackages(packages);
+  await writeData('packages.json', packages);
   return updated;
 }
 
@@ -59,7 +52,7 @@ export async function deletePackage(id: string): Promise<TripPackage | null> {
   const removed = packages.find((pkg) => pkg.id === id);
   if (!removed) return null;
 
-  await savePackages(packages.filter((pkg) => pkg.id !== id));
+  await writeData('packages.json', packages.filter((pkg) => pkg.id !== id));
   return removed;
 }
 
@@ -72,6 +65,6 @@ export async function createPackage(details: PackageDetails): Promise<TripPackag
 
   const created: TripPackage = { id, ...details };
   packages.push(created);
-  await savePackages(packages);
+  await writeData('packages.json', packages);
   return created;
 }

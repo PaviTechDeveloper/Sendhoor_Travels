@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express, { type Response } from 'express';
+import { fileURLToPath } from 'node:url';
 import type { ZodError } from 'zod';
 import { bookingSchema, enquirySchema } from './schemas.js';
 import { notifyOwner, type NotifyResult } from './notify.js';
@@ -10,12 +11,13 @@ import { createVehicle, deleteVehicle, listVehicles, updateVehicle, vehicleSchem
 import { blogSchema, createBlog, deleteBlog, listBlog, updateBlog } from './blog.js';
 
 const app = express();
+const clientDistDir = fileURLToPath(new URL('../../client/dist/', import.meta.url));
 // Photo uploads arrive as base64 text, so they get a bigger limit than the forms.
-app.use('/api/admin/uploads', express.json({ limit: '4mb' }));
+app.use('/api/admin/uploads', express.json({ limit: '5mb' }));
 // Blog posts can hold long paragraphs, so they get a bigger limit too.
 app.use('/api/admin/blog', express.json({ limit: '200kb' }));
 app.use(express.json({ limit: '16kb' }));
-app.use(UPLOAD_URL_PREFIX, express.static(uploadsDir));
+app.use(UPLOAD_URL_PREFIX, express.static(uploadsDir, { maxAge: '1y', immutable: true, fallthrough: false }));
 
 function fieldErrors(error: ZodError) {
   const errors: Record<string, string> = {};
@@ -230,6 +232,14 @@ app.delete('/api/admin/blog/:id', requireOwner, async (req, res) => {
     return;
   }
   res.json({ ok: true });
+});
+
+// In production the same Render service serves the built React app and API.
+app.use(express.static(clientDistDir));
+app.get(/^(?!\/api(?:\/|$)).*/, (_req, res, next) => {
+  res.sendFile(fileURLToPath(new URL('../../client/dist/index.html', import.meta.url)), (error) => {
+    if (error) next(error);
+  });
 });
 
 const port = Number(process.env.PORT ?? 4100);

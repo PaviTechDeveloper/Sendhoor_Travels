@@ -20,7 +20,7 @@ export default function Navbar() {
   // Only the home page starts over the dark hero; every other page needs a solid bar from the top.
   const { pathname } = useLocation();
   const solid = scrolled || menuOpen || pathname !== '/';
-  const textTone = 'text-ink';
+  const textTone = solid ? 'text-white' : 'text-ink';
 
   return (
     <motion.header
@@ -28,7 +28,7 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid ? 'bg-white/90 shadow-sm backdrop-blur-md' : 'bg-transparent'
+        solid ? 'bg-ink shadow-md' : 'bg-white/95 shadow-sm backdrop-blur-md'
       }`}
     >
       <nav aria-label="Main" className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -70,11 +70,11 @@ export default function Navbar() {
           id="mobile-menu"
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
-          className="overflow-hidden border-t border-ink/10 bg-white px-6 pb-6 lg:hidden"
+          className="overflow-hidden border-t border-white/15 bg-ink px-6 pb-6 lg:hidden"
         >
           {navLinks.map((link) => (
             <li key={link.to}>
-              <Link to={link.to} onClick={() => setMenuOpen(false)} className="block py-3 text-base font-medium text-ink">
+              <Link to={link.to} onClick={() => setMenuOpen(false)} className="block py-3 text-base font-medium text-white">
                 {link.label}
               </Link>
             </li>

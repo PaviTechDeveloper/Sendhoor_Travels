@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { Clock } from 'lucide-react';
 import { fetchBlog } from '../../lib/api';
 import { videoEmbedUrl, type BlogPost } from '../../lib/blog';
+import SafeImage from '../../components/ui/SafeImage';
 
 function Block({ block }: { block: BlogPost['blocks'][number] }) {
   if (block.type === 'heading') {
@@ -14,7 +15,7 @@ function Block({ block }: { block: BlogPost['blocks'][number] }) {
   if (block.type === 'image') {
     return (
       <figure>
-        <img src={block.url} alt={block.alt} loading="lazy" className="w-full rounded-2xl object-cover" />
+        <SafeImage src={block.url} alt={block.alt} className="w-full rounded-2xl object-cover" />
         {block.caption && <figcaption className="mt-2 text-sm text-ink/60">{block.caption}</figcaption>}
       </figure>
     );
@@ -71,7 +72,7 @@ export default function BlogArticle() {
             </p>
             <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink">{post.title}</h1>
             <p className="mt-4 text-lg text-ink/70">{post.excerpt}</p>
-            <img src={post.coverImage} alt={post.coverAlt} className="mt-8 aspect-video w-full rounded-3xl object-cover" />
+            <SafeImage src={post.coverImage} alt={post.coverAlt} className="mt-8 aspect-video w-full rounded-3xl object-cover" />
 
             <div className="mt-10 grid gap-6 text-lg leading-relaxed text-ink/80">
               {post.blocks.map((block, index) => (

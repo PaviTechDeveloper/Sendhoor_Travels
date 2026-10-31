@@ -1,9 +1,13 @@
 import { randomBytes } from 'node:crypto';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const uploadsDir = fileURLToPath(new URL('../data/uploads', import.meta.url));
+// Set UPLOADS_DIR to a persistent mounted volume in production. Local development
+// defaults to server/data/uploads, which is intentionally excluded from git.
+export const uploadsDir = process.env.UPLOADS_DIR
+  ? resolve(process.env.UPLOADS_DIR)
+  : fileURLToPath(new URL('../data/uploads', import.meta.url));
 export const UPLOAD_URL_PREFIX = '/api/uploads';
 
 const MAX_BYTES = 3 * 1024 * 1024;

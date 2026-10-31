@@ -1,9 +1,6 @@
-import { readFile, writeFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 import { photoPath } from './packages.js';
-
-const dataFile = fileURLToPath(new URL('../data/vehicles.json', import.meta.url));
+import { readData, writeData } from './storage.js';
 
 export const fuelTypes = ['Petrol', 'Diesel', 'CNG', 'Electric'] as const;
 
@@ -24,11 +21,7 @@ export type VehicleDetails = z.infer<typeof vehicleSchema>;
 export type VehicleRecord = VehicleDetails & { id: string };
 
 export async function listVehicles(): Promise<VehicleRecord[]> {
-  return JSON.parse(await readFile(dataFile, 'utf8')) as VehicleRecord[];
-}
-
-async function saveVehicles(vehicles: VehicleRecord[]) {
-  await writeFile(dataFile, `${JSON.stringify(vehicles, null, 2)}\n`, 'utf8');
+  return readData<VehicleRecord[]>('vehicles.json');
 }
 
 export async function createVehicle(details: VehicleDetails): Promise<VehicleRecord> {
@@ -40,7 +33,7 @@ export async function createVehicle(details: VehicleDetails): Promise<VehicleRec
 
   const created: VehicleRecord = { id, ...details };
   vehicles.push(created);
-  await saveVehicles(vehicles);
+  await writeData('vehicles.json', vehicles);
   return created;
 }
 
@@ -53,7 +46,7 @@ export async function updateVehicle(id: string, details: VehicleDetails) {
   const previous = vehicles[index];
   const updated: VehicleRecord = { id, ...details };
   vehicles[index] = updated;
-  await saveVehicles(vehicles);
+  await writeData('vehicles.json', vehicles);
   return { updated, previousPhotos: previous.photos };
 }
 
@@ -62,6 +55,6 @@ export async function deleteVehicle(id: string): Promise<VehicleRecord | null> {
   const removed = vehicles.find((vehicle) => vehicle.id === id);
   if (!removed) return null;
 
-  await saveVehicles(vehicles.filter((vehicle) => vehicle.id !== id));
+  await writeData('vehicles.json', vehicles.filter((vehicle) => vehicle.id !== id));
   return removed;
 }

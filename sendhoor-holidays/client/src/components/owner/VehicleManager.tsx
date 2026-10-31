@@ -1,6 +1,7 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
 import SectionHeading from '../ui/SectionHeading';
 import Button from '../ui/Button';
+import SafeImage from '../ui/SafeImage';
 import FormField, { inputClass } from '../forms/FormField';
 import AdminTabs, { type AdminTab } from './AdminTabs';
 import { fetchVehicles } from '../../lib/api';
@@ -236,7 +237,7 @@ export default function VehicleManager({ onTabChange, onSessionEnd }: VehicleMan
           <div className="flex flex-wrap gap-4">
             {draft.photos.map((url) => (
               <div key={url} className="relative">
-                <img src={url} alt="" className="size-28 rounded-2xl object-cover" />
+                <SafeImage src={url} alt="Vehicle photo preview" className="size-28 rounded-2xl object-cover" />
                 <button
                   type="button"
                   onClick={() => removePhoto(url)}
@@ -323,7 +324,7 @@ export default function VehicleManager({ onTabChange, onSessionEnd }: VehicleMan
               >
                 <div className="flex items-center gap-4">
                   {vehicle.photos[0] ? (
-                    <img src={vehicle.photos[0]} alt="" className="size-20 rounded-2xl object-cover" />
+                    <SafeImage src={vehicle.photos[0]} alt="" className="size-20 rounded-2xl object-cover" />
                   ) : (
                     <div className="flex size-20 items-center justify-center rounded-2xl bg-sand text-xs text-ink/60">
                       No photos

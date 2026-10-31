@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { CalendarDays, MapPin, Wallet } from 'lucide-react';
 import SectionHeading from '../../components/ui/SectionHeading';
 import Button from '../../components/ui/Button';
+import SafeImage from '../../components/ui/SafeImage';
 import { StaggerGroup, StaggerItem } from '../../components/motion/StaggerReveal';
 import { formatDays, formatPriceRange, type TwoDayTrip } from '../../lib/twoDayTrips';
 import { fetchPackages } from '../../lib/api';
@@ -17,7 +18,7 @@ function TwoDayCard({ trip, rank }: { trip: TwoDayTrip; rank: number }) {
       className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-md ring-1 ring-ink/5 transition hover:shadow-xl"
     >
       <div className="relative aspect-16/10">
-        <img src={trip.image} alt={trip.imageAlt} loading="lazy" className="absolute inset-0 size-full object-cover" />
+        <SafeImage src={trip.image} alt={trip.imageAlt} className="absolute inset-0 size-full object-cover" />
         <div className="absolute inset-0 bg-linear-to-t from-ink/80 via-ink/20 to-transparent" aria-hidden />
         <span className="absolute top-4 left-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-ink">
           {trip.state}

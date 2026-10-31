@@ -1,6 +1,7 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
 import SectionHeading from '../ui/SectionHeading';
 import Button from '../ui/Button';
+import SafeImage from '../ui/SafeImage';
 import FormField, { inputClass } from '../forms/FormField';
 import AdminTabs, { type AdminTab } from './AdminTabs';
 import { fetchBlog } from '../../lib/api';
@@ -66,7 +67,7 @@ function BlockEditor({ block, index, total, uploading, onChange, onMove, onRemov
   } else if (block.type === 'image') {
     body = (
       <>
-        {block.url && <img src={block.url} alt="" className="aspect-video w-full max-w-sm rounded-2xl object-cover" />}
+        {block.url && <SafeImage src={block.url} alt="Blog image preview" className="aspect-video w-full max-w-sm rounded-2xl object-cover" />}
         <FormField id={`${id}-file`} label={block.url ? 'Replace photo (JPG, PNG or WebP)' : 'Upload photo (JPG, PNG or WebP)'}>
           <input
             id={`${id}-file`}
@@ -300,7 +301,7 @@ export default function BlogManager({ onTabChange, onSessionEnd }: BlogManagerPr
 
       <div className="grid gap-3 md:col-span-2">
         <p className="text-sm font-medium text-ink">Cover photo</p>
-        {draft.coverImage && <img src={draft.coverImage} alt="" className="aspect-video w-full max-w-sm rounded-2xl object-cover" />}
+        {draft.coverImage && <SafeImage src={draft.coverImage} alt="Blog cover preview" className="aspect-video w-full max-w-sm rounded-2xl object-cover" />}
         <FormField id="blog-cover" label={draft.coverImage ? 'Replace cover photo' : 'Upload cover photo (JPG, PNG or WebP)'}>
           <input
             id="blog-cover"
@@ -405,7 +406,7 @@ export default function BlogManager({ onTabChange, onSessionEnd }: BlogManagerPr
                 className="flex flex-col gap-4 rounded-3xl bg-white p-6 ring-1 ring-ink/10 sm:flex-row sm:items-center sm:justify-between"
               >
                 <div className="flex items-center gap-4">
-                  <img src={post.coverImage} alt="" className="size-20 rounded-2xl object-cover" />
+                  <SafeImage src={post.coverImage} alt="" className="size-20 rounded-2xl object-cover" />
                   <div>
                     <h3 className="text-lg font-bold text-ink">{post.title}</h3>
                     <p className="text-sm text-ink/70">

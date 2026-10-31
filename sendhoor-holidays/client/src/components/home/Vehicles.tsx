@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Bus, Car, Check, Fuel } from 'lucide-react';
 import SectionHeading from '../ui/SectionHeading';
 import Button from '../ui/Button';
+import SafeImage from '../ui/SafeImage';
 import { StaggerGroup, StaggerItem } from '../motion/StaggerReveal';
 import { fetchVehicles } from '../../lib/api';
 import type { VehicleRecord } from '../../lib/vehicles';
@@ -21,10 +22,9 @@ function Gallery({ vehicle, Icon }: { vehicle: VehicleRecord; Icon: typeof Car }
 
   return (
     <div>
-      <img
+      <SafeImage
         src={vehicle.photos[active]}
         alt={`${vehicle.name} photo ${active + 1} of ${vehicle.photos.length}`}
-        loading="lazy"
         className="aspect-16/10 w-full rounded-2xl object-cover"
       />
       {vehicle.photos.length > 1 && (
@@ -38,7 +38,7 @@ function Gallery({ vehicle, Icon }: { vehicle: VehicleRecord; Icon: typeof Car }
               aria-pressed={index === active}
               className={`size-14 shrink-0 overflow-hidden rounded-xl ring-2 ${index === active ? 'ring-brand' : 'ring-transparent'}`}
             >
-              <img src={photo} alt="" className="size-full object-cover" />
+              <SafeImage src={photo} alt={`${vehicle.name} thumbnail ${index + 1}`} className="size-full object-cover" />
             </button>
           ))}
         </div>

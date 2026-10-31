@@ -1,10 +1,7 @@
-import { readFile, writeFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 import { photoPath } from './packages.js';
 import { removeUpload } from './uploads.js';
-
-const dataFile = fileURLToPath(new URL('../data/blog.json', import.meta.url));
+import { readData, writeData } from './storage.js';
 
 // Videos are linked from YouTube or Vimeo rather than uploaded, so the site does not store large files.
 const videoLink = z
@@ -47,11 +44,7 @@ function uploadsIn(details: BlogDetails) {
 }
 
 async function listRecords(): Promise<BlogRecord[]> {
-  return JSON.parse(await readFile(dataFile, 'utf8')) as BlogRecord[];
-}
-
-async function saveRecords(records: BlogRecord[]) {
-  await writeFile(dataFile, `${JSON.stringify(records, null, 2)}\n`, 'utf8');
+  return readData<BlogRecord[]>('blog.json');
 }
 
 // Estimated at 200 words a minute, and never less than one minute.
@@ -74,7 +67,7 @@ export async function createBlog(details: BlogDetails): Promise<BlogPost> {
 
   const created: BlogRecord = { id, ...details };
   records.push(created);
-  await saveRecords(records);
+  await writeData('blog.json', records);
   return { ...created, readTime: readTime(details) };
 }
 
@@ -87,7 +80,7 @@ export async function updateBlog(id: string, details: BlogDetails): Promise<Blog
   const previous = uploadsIn(records[index]);
   const updated: BlogRecord = { id, ...details };
   records[index] = updated;
-  await saveRecords(records);
+  await writeData('blog.json', records);
 
   const kept = new Set(uploadsIn(details));
   await Promise.all(previous.filter((url) => !kept.has(url)).map(removeUpload));
@@ -99,7 +92,7 @@ export async function deleteBlog(id: string): Promise<boolean> {
   const removed = records.find((record) => record.id === id);
   if (!removed) return false;
 
-  await saveRecords(records.filter((record) => record.id !== id));
+  await writeData('blog.json', records.filter((record) => record.id !== id));
   await Promise.all(uploadsIn(removed).map(removeUpload));
   return true;
 }

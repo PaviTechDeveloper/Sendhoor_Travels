@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Clock } from 'lucide-react';
 import SectionHeading from '../ui/SectionHeading';
+import SafeImage from '../ui/SafeImage';
 import { StaggerGroup, StaggerItem } from '../motion/StaggerReveal';
 import { fetchBlog } from '../../lib/api';
 import type { BlogPost } from '../../lib/blog';
@@ -35,10 +36,9 @@ export default function BlogTeaser() {
                 <Link to={`/blog/${post.id}`} className="group block h-full">
                   <article className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-ink/5 transition group-hover:shadow-lg">
                     <div className="relative aspect-video">
-                      <img
+                      <SafeImage
                         src={post.coverImage}
                         alt={post.coverAlt}
-                        loading="lazy"
                         className="absolute inset-0 size-full object-cover transition duration-500 group-hover:scale-105"
                       />
                     </div>

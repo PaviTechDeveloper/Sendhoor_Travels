@@ -4,7 +4,7 @@ import SectionHeading from '../ui/SectionHeading';
 import Button from '../ui/Button';
 import FormField, { inputClass } from '../forms/FormField';
 import { bookingRequestSchema } from '../../features/bookings/schemas';
-import { destinations } from '../../lib/siteContent';
+import { destinations, indiaBookingDestinations } from '../../lib/siteContent';
 import { submitForm } from '../../lib/api';
 
 const emptyValues = {
@@ -111,11 +111,16 @@ export default function BookingForm() {
           <FormField id="book-destination" label="Destination" error={errors.destination}>
             <select {...fieldProps('destination')}>
               <option value="">Select a destination</option>
-              {destinations.map((d) => (
-                <option key={d.name} value={d.name}>
-                  {d.name}
-                </option>
-              ))}
+              <optgroup label="India (A–Z)">
+                {indiaBookingDestinations.map((name) => (
+                  <option key={name} value={name}>{name}</option>
+                ))}
+              </optgroup>
+              <optgroup label="International">
+                {destinations.filter((d) => d.country !== 'India')
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((d) => <option key={d.name} value={d.name}>{d.name}</option>)}
+              </optgroup>
               <option value="Not sure yet">Not sure yet</option>
             </select>
           </FormField>

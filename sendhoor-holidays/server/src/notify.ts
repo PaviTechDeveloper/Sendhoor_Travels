@@ -32,6 +32,10 @@ const transporter = nodemailer.createTransport({
   port: smtpPort,
   secure: smtpPort === 465,
   auth: { user: env('SMTP_USER'), pass: env('SMTP_PASS') },
+  // Avoid leaving booking requests pending when the SMTP connection is blocked or unavailable.
+  connectionTimeout: 8_000,
+  greetingTimeout: 8_000,
+  socketTimeout: 15_000,
 });
 
 async function sendEmail(notification: Notification) {
@@ -58,6 +62,7 @@ async function sendTwilio(to: string, from: string, body: string) {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({ To: to, From: from, Body: body }),
+    signal: AbortSignal.timeout(10_000),
   });
 
   // Only the status is thrown. Twilio's error body can echo the phone number.

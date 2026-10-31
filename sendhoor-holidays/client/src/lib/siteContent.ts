@@ -51,6 +51,26 @@ export const destinations: Destination[] = [
   { name: 'Maldives', country: 'Maldives', tagline: 'Overwater villas and lagoons', ...photo.maldives },
 ];
 
+// Booking choices cover every Indian state and union territory, plus popular
+// Indian travel cities and regions. Keep this independent from featured cards.
+export const indiaBookingDestinations = [
+  'Agra', 'Ahmedabad', 'Aizawl', 'Ajmer', 'Alappuzha', 'Amritsar', 'Andaman and Nicobar Islands',
+  'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Aurangabad', 'Ayodhya', 'Bengaluru', 'Bhopal',
+  'Bhubaneswar', 'Bihar', 'Bikaner', 'Chandigarh', 'Chennai', 'Cherrapunji', 'Chhattisgarh',
+  'Chikmagalur', 'Chitrakoot', 'Coimbatore',
+  'Coorg', 'Coonoor', 'Dadra and Nagar Haveli and Daman and Diu', 'Darjeeling', 'Dehradun', 'Delhi',
+  'Dharamshala', 'Diu', 'Goa', 'Gokarna', 'Gujarat', 'Guwahati', 'Hampi', 'Haryana', 'Hyderabad',
+  'Himachal Pradesh', 'Imphal', 'Indore', 'Jabalpur', 'Jaipur', 'Jaisalmer', 'Jammu', 'Jharkhand',
+  'Jammu and Kashmir', 'Jodhpur', 'Karnataka', 'Kashmir', 'Kanyakumari', 'Kerala', 'Kochi', 'Kolkata', 'Konark', 'Kullu',
+  'Kutch', 'Ladakh', 'Lakshadweep', 'Lucknow', 'Ludhiana', 'Madurai', 'Madhya Pradesh',
+  'Mahabalipuram', 'Maharashtra', 'Manali', 'Mangaluru', 'Manipur', 'Meghalaya', 'Mizoram', 'Mumbai', 'Munnar',
+  'Mussoorie', 'Mysuru', 'Nagaland', 'Nagpur', 'Nashik', 'Ooty', 'Odisha', 'Pachmarhi', 'Patna',
+  'Puducherry', 'Pune', 'Punjab', 'Puri', 'Rajasthan', 'Rajasthan Desert Circuit', 'Rann of Kutch',
+  'Rishikesh', 'Sikkim', 'Shillong', 'Shimla', 'Srinagar', 'Surat', 'Tamil Nadu', 'Tawang',
+  'Telangana', 'Thanjavur', 'Thiruvananthapuram', 'Tirupati', 'Tripura', 'Udaipur', 'Uttar Pradesh',
+  'Uttarakhand', 'Varanasi', 'Vijayawada', 'Visakhapatnam', 'Wayanad', 'West Bengal',
+].sort((a, b) => a.localeCompare(b));
+
 export const faqs: FaqItem[] = [
   { question: 'How do I book a trip?', answer: 'Choose a package or send a booking request. Our advisors confirm availability and send you a quote within 24 hours.' },
   { question: 'Can I customize a package?', answer: 'Yes. Every package can be changed for dates, hotels, transport and activities. Tell us what you want in the request form.' },

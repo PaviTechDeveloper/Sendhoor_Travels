@@ -34,6 +34,7 @@ export async function submitForm(path: string, body: unknown): Promise<SubmitRes
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
+      signal: AbortSignal.timeout(20_000),
     });
     const data = await response.json().catch(() => ({}));
     if (response.ok && data.ok) return { ok: true };

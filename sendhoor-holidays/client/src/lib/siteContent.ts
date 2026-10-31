@@ -23,6 +23,7 @@ export interface PhotoCredit {
 
 export const navLinks = [
   { label: 'Destinations', to: '/destinations' },
+  { label: 'Activities', to: '/#activities' },
   { label: 'Packages', to: '/packages' },
   { label: 'Admin', to: '/admin' },
   { label: 'Vehicles', to: '/#vehicles' },
@@ -82,4 +83,12 @@ export const photoCredits: PhotoCredit[] = [
   { subject: 'Main beach, Gokarna', photographer: 'Alexey Komarov', license: 'CC BY-SA 4.0', source: 'https://commons.wikimedia.org/wiki/File:Gokarna_Main_Beach_in_January_2023.jpg' },
   { subject: 'Waterfall near Lonavala', photographer: 'Shishirdasika', license: 'CC BY-SA 4.0', source: 'https://commons.wikimedia.org/wiki/File:Lonavala_waterfalls.jpg' },
   { subject: 'River rafting, Rishikesh', photographer: 'Goutam1962', license: 'CC BY-SA 4.0', source: 'https://commons.wikimedia.org/wiki/File:River_Rafting_in_Ganga_Near_Ram_Jhula_Rishikesh_01.jpg' },
+  { subject: 'Zip line over the Giri river, Himachal', photographer: 'psubhashish', license: 'CC BY-SA 3.0', source: 'https://commons.wikimedia.org/wiki/File:Zip_line_on_Giri_river,_Himachal.jpg' },
+  { subject: 'Paragliding, Bir Billing', photographer: 'Gannu03', license: 'CC BY-SA 4.0', source: 'https://commons.wikimedia.org/wiki/File:Paragliding_in_Bir-Billing_(41721).jpg' },
+  { subject: 'White-water rafting, Uganda', photographer: 'Ypstudio', license: 'CC0', source: 'https://commons.wikimedia.org/wiki/File:Best_guied_rafting_in_uganda_with_kiira_rafting.jpg' },
+  { subject: 'Chembra Peak and Heart Lake, Kerala', photographer: 'Ravi Dwivedi', license: 'CC BY-SA 4.0', source: 'https://commons.wikimedia.org/wiki/File:Chembra_Peak_Heart_Lake.jpg' },
+  { subject: 'Scuba diver on a reef', photographer: 'Peter Southwood', license: 'CC BY-SA 4.0', source: 'https://commons.wikimedia.org/wiki/File:Sidemount_diver_at_the_Labyrinth_reef_P7070036.jpg' },
+  { subject: 'Desert quad bikes', photographer: 'Shammi Choudary', license: 'CC BY-SA 4.0', source: 'https://commons.wikimedia.org/wiki/File:Desert_Bikes.jpg' },
+  { subject: 'Bungee jump', photographer: 'Poni Abraham', license: 'CC0', source: 'https://commons.wikimedia.org/wiki/File:Bungee_Jump_is_freedom.jpg' },
+  { subject: 'Kayaking', photographer: 'Tripjodi', license: 'CC BY-SA 4.0', source: 'https://commons.wikimedia.org/wiki/File:Tripjodi_Kayaking.jpg' },
 ];

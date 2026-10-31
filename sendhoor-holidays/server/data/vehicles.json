@@ -11,7 +11,10 @@
       "Experienced driver",
       "Space for two large bags"
     ],
-    "photos": []
+    "photos": [
+      "/api/uploads/bed3f690c32955d75f50966e.jpg",
+      "/api/uploads/8d5b33d17c26b3f972ce201a.jpg"
+    ]
   },
   {
     "id": "coach-bus",

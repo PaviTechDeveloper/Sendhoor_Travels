@@ -1,5 +1,6 @@
 import Hero from '../../components/home/Hero';
 import Destinations from '../../components/home/Destinations';
+import Activities from '../../components/home/Activities';
 import Vehicles from '../../components/home/Vehicles';
 import WhyUs from '../../components/home/WhyUs';
 import BlogTeaser from '../../components/home/BlogTeaser';
@@ -12,6 +13,7 @@ export default function Home() {
     <main id="main">
       <Hero />
       <Destinations />
+      <Activities />
       <Vehicles />
       <WhyUs />
       <BlogTeaser />

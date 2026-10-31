@@ -1,6 +1,7 @@
 import { access, copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isSupabaseConfigured, readRemoteData, writeRemoteData } from './supabase.js';
 
 // Render's mounted disk can hold both catalog data and uploaded media.
 const defaultDataDir = fileURLToPath(new URL('../data/', import.meta.url));
@@ -29,11 +30,26 @@ async function ensureSeedFile(filename: string) {
 }
 
 export async function readData<T>(filename: string): Promise<T> {
+  if (isSupabaseConfigured()) {
+    const stored = await readRemoteData<T>(filename);
+    if (stored !== null) return stored;
+
+    const seedPath = fileURLToPath(new URL(`../data/${filename}`, import.meta.url));
+    const seed = JSON.parse(await readFile(seedPath, 'utf8')) as T;
+    await writeRemoteData(filename, seed);
+    return seed;
+  }
+
   const path = await ensureSeedFile(filename);
   return JSON.parse(await readFile(path, 'utf8')) as T;
 }
 
 export async function writeData<T>(filename: string, value: T): Promise<void> {
+  if (isSupabaseConfigured()) {
+    await writeRemoteData(filename, value);
+    return;
+  }
+
   const path = await ensureSeedFile(filename);
   await writeFile(path, `${JSON.stringify(value, null, 2)}\n`, 'utf8');
 }

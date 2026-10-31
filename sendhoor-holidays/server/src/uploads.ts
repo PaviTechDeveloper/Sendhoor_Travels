@@ -2,6 +2,7 @@ import { randomBytes } from 'node:crypto';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isSupabaseConfigured, removeRemoteImage, uploadRemoteImage } from './supabase.js';
 
 // Set UPLOADS_DIR to a persistent mounted volume in production. Local development
 // defaults to server/data/uploads, which is intentionally excluded from git.
@@ -25,6 +26,11 @@ const formats = {
 
 // Deletes a photo this site uploaded. Paths to other photos (such as /images/...) are left alone.
 export async function removeUpload(url: string) {
+  if (isSupabaseConfigured() && /^https:\/\//.test(url)) {
+    await removeRemoteImage(new URL(url));
+    return;
+  }
+
   const match = new RegExp(`^${UPLOAD_URL_PREFIX}/([a-f0-9]{24}\\.(?:jpg|png|webp))$`).exec(url);
   if (match) await rm(join(uploadsDir, match[1]), { force: true });
 }
@@ -43,8 +49,17 @@ export async function saveImage(dataUrl: string): Promise<{ ok: true; url: strin
     return { ok: false, message: 'That file is not a valid JPG, PNG or WebP photo.' };
   }
 
-  await mkdir(uploadsDir, { recursive: true });
   const name = `${randomBytes(12).toString('hex')}.${format.ext}`;
+  if (isSupabaseConfigured()) {
+    try {
+      const url = await uploadRemoteImage(name, bytes, format.mime);
+      return { ok: true, url };
+    } catch (error) {
+      return { ok: false, message: error instanceof Error ? error.message : 'Could not save the photo to Supabase.' };
+    }
+  }
+
+  await mkdir(uploadsDir, { recursive: true });
   await writeFile(join(uploadsDir, name), bytes);
   return { ok: true, url: `${UPLOAD_URL_PREFIX}/${name}` };
 }

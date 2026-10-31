@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Instagram, Mail, MapPin, Phone } from 'lucide-react';
-import { navLinks, photoCredits } from '../../lib/siteContent';
+import { navLinks } from '../../lib/siteContent';
 
 export default function Footer() {
   return (

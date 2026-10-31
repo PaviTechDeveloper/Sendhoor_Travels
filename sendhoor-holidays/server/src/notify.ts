@@ -40,7 +40,35 @@ const transporter = nodemailer.createTransport({
 
 async function sendEmail(notification: Notification) {
   const to = env('OWNER_EMAIL');
-  if (!to || !env('SMTP_USER') || !env('SMTP_PASS')) throw new NotConfigured();
+  if (!to) throw new NotConfigured();
+
+  const relayUrl = env('GOOGLE_MAIL_SCRIPT_URL');
+  const relaySecret = env('GOOGLE_MAIL_SCRIPT_SECRET');
+  if (relayUrl || relaySecret) {
+    if (!relayUrl || !relaySecret) {
+      throw new Error('Both Google mail relay settings must be configured.');
+    }
+
+    const response = await fetch(relayUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: relaySecret,
+        to,
+        replyTo: notification.replyTo,
+        subject: notification.subject,
+        text: notification.text,
+      }),
+      signal: AbortSignal.timeout(15_000),
+    });
+    const result = await response.json().catch(() => null) as { ok?: boolean } | null;
+    if (!response.ok || !result?.ok) {
+      throw new Error(`Google mail relay responded with status ${response.status}`);
+    }
+    return;
+  }
+
+  if (!env('SMTP_USER') || !env('SMTP_PASS')) throw new NotConfigured();
 
   await transporter.sendMail({
     from: `Sendhoor Website <${env('SMTP_USER')}>`,

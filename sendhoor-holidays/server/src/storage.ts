@@ -3,13 +3,22 @@ import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Render's mounted disk can hold both catalog data and uploaded media.
-export const dataDir = process.env.DATA_DIR
-  ? resolve(process.env.DATA_DIR)
-  : fileURLToPath(new URL('../data/', import.meta.url));
+const defaultDataDir = fileURLToPath(new URL('../data/', import.meta.url));
+export const dataDir = process.env.DATA_DIR ? resolve(process.env.DATA_DIR) : defaultDataDir;
+let useDefaultDataDir = false;
 
 async function ensureSeedFile(filename: string) {
-  await mkdir(dataDir, { recursive: true });
-  const target = join(dataDir, filename);
+  let activeDir = useDefaultDataDir ? defaultDataDir : dataDir;
+  try {
+    await mkdir(activeDir, { recursive: true });
+  } catch (error) {
+    if (activeDir === defaultDataDir) throw error;
+    useDefaultDataDir = true;
+    activeDir = defaultDataDir;
+    await mkdir(activeDir, { recursive: true });
+    console.error(`Cannot access DATA_DIR=${dataDir}; using temporary app data instead. Attach a writable Render disk at /var/data.`, error);
+  }
+  const target = join(activeDir, filename);
   try {
     await access(target);
   } catch {

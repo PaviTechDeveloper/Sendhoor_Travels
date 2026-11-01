@@ -31,9 +31,9 @@ export default function Navbar() {
         solid ? 'bg-ink shadow-md' : 'bg-white/95 shadow-sm backdrop-blur-md'
       }`}
     >
-      <nav aria-label="Main" className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <nav aria-label="Main" className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         <Link to="/" aria-label="Sendhoor Holidays home">
-          <img src="/images/logo.jpg" alt="" className="h-12 w-12 rounded-xl object-cover" />
+          <img src="/images/logo.png" alt="Sendhoor Holidays" className="h-20 w-20 object-contain sm:h-24 sm:w-24" />
         </Link>
 
         <span className={`flex-1 whitespace-nowrap text-center text-sm font-bold sm:text-base lg:hidden ${textTone}`}>

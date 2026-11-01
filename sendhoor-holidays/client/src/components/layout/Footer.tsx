@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="bg-sky text-ink/80">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 md:grid-cols-3">
         <div>
-          <img src="/images/logo.jpg" alt="Sendhoor Holidays" className="h-16 w-16 rounded-2xl object-cover" />
+          <img src="/images/logo.png" alt="Sendhoor Holidays" className="h-32 w-32 object-contain" />
           <p className="mt-4 text-lg font-bold text-ink">Sendhoor Holidays</p>
           <p className="mt-3 max-w-xs text-sm">
             Thoughtfully planned trips, honest advice and support from the first enquiry to the final day.
